@@ -1,0 +1,38 @@
+/*Algorithm
+1. Fix the base case
+2. Sort the array
+3. for each possible index and check if you want to proceed with that index i.e. not repeated hence proceed for index j+1
+4. once you have index j+1 then go for working on to finding 2 sum from other 2 indices.
+*/
+
+class Solution {
+    public List<List<Integer>> fourSum(int[] nums, int target) {
+        List<List<Integer>> al = new ArrayList<List<Integer>>();
+        if(nums==null || nums.length<4)
+            return al;
+        Arrays.sort(nums);
+        for(int i=0; i<=nums.length-4;i++) {
+            if(i!=0 && nums[i]==nums[i-1]){continue;}
+            for(int j=i+1;j<=nums.length-3; j++) {
+                if(j!=i+1 && nums[j]==nums[j-1]){continue;}
+                fillTwoSum(nums, j+1, nums.length-1, nums[i], nums[j], target, al);
+            }
+        }
+        return al;
+    }
+    void fillTwoSum(int[] nums, int s, int e, int a, int b, int target, List<List<Integer>> al){
+            while(s<e) {
+                int total = a+b+nums[s]+nums[e];
+                if(total==target) {
+                    ArrayList<Integer> ans = new ArrayList<Integer>();
+                    ans.add(a);ans.add(b);ans.add(nums[s]);ans.add(nums[e]);
+                    al.add(ans);
+                    s++;e--;
+                    while(s<e && nums[s]==nums[s-1])s++;
+                    while(s<e && nums[e]==nums[e+1])e--;
+                }else if(total<target){s++;}
+                else{e--;}
+            }
+        }
+
+}

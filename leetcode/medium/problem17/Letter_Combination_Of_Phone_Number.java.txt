@@ -1,0 +1,30 @@
+/*
+Algorithm:
+1. Create mapping for the string array
+2. Handle the null/error case
+3. find the combination from each string recursively pattern
+*/
+
+
+class Solution {
+    public List<String> letterCombinations(String digits) {
+     String[] mapping = {
+         "0", "1", "abc", "def", "ghi", "jkl", "mno", "pqrs", "tuv", "wxyz"
+     };   
+        List<String> result = new ArrayList<String>();
+        if(digits==null || digits.length()==0)
+            return result;
+        findCombinations(digits, 0, "", result, mapping);
+        return result;
+    }
+    
+    private void findCombinations(String digits, int index, String s, List<String> al, String[] mapping) {
+        if(index==digits.length()){al.add(s); return;}
+        String letters = mapping[digits.charAt(index)-'0'];
+        for(char ch:letters.toCharArray()) {
+            findCombinations(digits, index+1, s+ch, al, mapping);
+        }
+    }
+    
+    
+}

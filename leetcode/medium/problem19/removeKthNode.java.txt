@@ -1,0 +1,35 @@
+/*
+Algorithm:
+1. First take head start from slow pointer by k nodes so that fast is at position 1 and slow is at position (k+1)
+2. If could not take head start and only diff is of size k-1 implies total were k elements so jump to next node
+3. If took head start reach till end node so that you become 1st node so called last node is called first node
+and because the diff is of size k implies slow will be at position k+1.
+
+Hint: The way to think about this problem is to build the goal of reaching end once you reach end/fast pointer, 
+see where did you want to reach from slow pointer which is k+1th node so diff of k nodes was important/headstart=k
+*/
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode removeNthFromEnd(ListNode head, int n) {
+        if(head==null){return null;}
+        ListNode slow = head;
+        ListNode fast = head;
+        while(n>0 && fast.next!=null) {
+            fast=fast.next;
+            n--;
+        }
+        if(n==1){return head.next;}
+        while(fast.next!=null){fast=fast.next;slow=slow.next;}
+        slow.next=slow.next.next;
+        return head;
+    }
+}
