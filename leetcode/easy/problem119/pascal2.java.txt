@@ -1,0 +1,21 @@
+/*
+Algorithm: Similar to pascal triangle but need to have only one arraylist
+*/
+
+class Solution {
+    public List<Integer> getRow(int rowIndex) {
+        List<Integer> al = new ArrayList<Integer>();
+        if(rowIndex<0)
+            return al;
+        al.add(1);
+        for(int i=1; i<=rowIndex; i++) {
+            List<Integer> current = new ArrayList<Integer>();
+            current.add(1);
+            for(int j=1; j<al.size(); j++)
+                current.add(al.get(j-1)+al.get(j));
+            current.add(1);
+            al=current;
+        }
+        return al;
+    }
+}

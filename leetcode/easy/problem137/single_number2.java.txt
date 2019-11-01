@@ -1,0 +1,16 @@
+/*Algorithm
+put the count of each and return the element with count==1
+*/
+
+class Solution {
+    public int singleNumber(int[] nums) {
+        HashMap<Integer, Integer> hm = new HashMap<Integer, Integer>();
+        for(int i:nums){
+            hm.put(i, hm.getOrDefault(i, 0)+1);
+        }
+        for(int k:hm.keySet())
+            if(hm.get(k)==1)
+                return k;
+        return -1;
+    }
+}

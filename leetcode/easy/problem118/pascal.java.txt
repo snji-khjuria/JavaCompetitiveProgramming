@@ -1,0 +1,24 @@
+/*
+Algorithm: Use the prev row to compute the current row values and compute the indices accordingly which is i and i-1
+*/
+
+class Solution {
+    public List<List<Integer>> generate(int numRows) {
+        List<List<Integer>> al = new ArrayList<List<Integer>>();
+        if(numRows<=0)
+            return al;
+        List<Integer> current = new ArrayList<Integer>();
+        current.add(1);
+        al.add(current);
+        for(int i=2; i<=numRows; i++) {
+            List<Integer> prev = al.get(al.size()-1);
+            current=new ArrayList<Integer>();
+            current.add(1);
+            for(int j=1; j<prev.size(); j++)
+                current.add(prev.get(j-1)+prev.get(j));
+            current.add(1);
+            al.add(current);
+        }
+        return al;
+    }
+}

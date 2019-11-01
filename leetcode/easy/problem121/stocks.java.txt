@@ -1,0 +1,21 @@
+/*
+Algorithm:
+Just think you can only make single transaction. so whenver the price goes higher than past you might want to do transaction
+because god knows what will happen in future but if this price is less than what you have seen so far you will never make any deal
+So keep track of min price so far and profit made so far and finally after seeing all numbers you can tell what you wanted to do and
+how much profit you made
+*/
+
+class Solution {
+    public int maxProfit(int[] prices) {
+        int profit = 0;
+        int min = Integer.MAX_VALUE;
+        for(int p:prices) {
+            if(p<min)
+                min = p;
+            else
+                profit = Math.max(profit, p-min);
+        }
+        return profit;
+    }
+}

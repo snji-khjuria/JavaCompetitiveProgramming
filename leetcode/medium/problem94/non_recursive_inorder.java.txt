@@ -1,0 +1,36 @@
+/*
+Algorithm:
+First we pass every left node as a path to the stack
+keep popping and use it as answer as its left is already processed and now jump onto right
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public List<Integer> inorderTraversal(TreeNode root) {
+        Stack<TreeNode> stk = new Stack<TreeNode>();
+        addLeftToStack(stk, root);
+        List<Integer> al = new ArrayList<Integer>();
+        while(!stk.isEmpty()) {
+            root = stk.pop();
+            al.add(root.val);
+            if(root.right!=null) {
+                root=root.right;
+                addLeftToStack(stk, root);
+            }
+        }
+        return al;
+    }
+    void addLeftToStack(Stack<TreeNode> stk, TreeNode root) {
+        while(root!=null) {
+            stk.push(root);root=root.left;
+        }
+    }
+}

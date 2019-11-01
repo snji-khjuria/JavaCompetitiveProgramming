@@ -1,0 +1,29 @@
+/*
+Algorithm:
+Pass the possible min and max values a specific tree can take and then if you go left change the max possible
+because it is affected being left child and change the min value if you go onto right
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isValidBST(TreeNode root) {
+        return validate(root, null, null);
+        
+    }
+    boolean validate(TreeNode root, Integer min, Integer max) {
+        if(root==null)
+            return true;
+        if((min!=null &&root.val<=min) || (max!=null && root.val>=max))
+            return false;
+        return validate(root.left, min, root.val) && validate(root.right, root.val, max);
+    }
+}

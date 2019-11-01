@@ -1,0 +1,23 @@
+/*
+Algorithm:
+1. Fill with the help of dp table
+2. if current digit is not zero which means can go for n-1 digits
+3. If current + prev digit>=10 and <=26 which means can go for last 2 digits
+*/
+
+class Solution {
+    public int numDecodings(String s) {
+        int[] ways = new int[s.length()+1];
+        ways[0] = 1;
+        ways[1] = s.charAt(0)!='0'?1:0;
+        for(int i=2; i<=s.length(); i++) {
+            int oneDigit = Integer.parseInt(s.substring(i-1, i));
+            int twoDigit = Integer.parseInt(s.substring(i-2, i));
+            if(oneDigit>0)
+                ways[i]+=ways[i-1];
+            if(twoDigit>=10 && twoDigit<=26)
+                ways[i]+=ways[i-2];
+        }
+        return ways[s.length()];
+    }
+}

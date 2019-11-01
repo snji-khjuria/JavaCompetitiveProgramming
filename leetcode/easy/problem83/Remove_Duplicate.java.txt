@@ -1,0 +1,31 @@
+/*
+Algorithm:
+Your current node should be second node because first node is alredy non-duplicate.
+Start from second index and keep checking if it is not equal to prev, implies add it to result else ignore
+*/
+
+
+
+/**
+ * Definition for singly-linked list.
+ * public class ListNode {
+ *     int val;
+ *     ListNode next;
+ *     ListNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public ListNode deleteDuplicates(ListNode head) {
+        if(head==null)
+            return null;
+        ListNode prev=head;
+        ListNode current=head.next;
+        while(current!=null) {
+            if(current.val==prev.val)
+                current=current.next;
+            else{prev.next=current;prev=current;current=current.next;}
+        }
+        prev.next=null;
+        return head;
+    }
+}

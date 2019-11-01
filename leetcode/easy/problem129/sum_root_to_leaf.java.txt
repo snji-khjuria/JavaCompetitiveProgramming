@@ -1,0 +1,31 @@
+/*
+Algorithm:
+Whenever you reach at end of tree and then you get the number, add it to the results you have so far.
+In each recursive call keep changing the current number you have seen so far
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    Integer ans;
+    public int sumNumbers(TreeNode root) {
+        ans=0;
+        findSum(root, 0);
+        return ans;
+    }
+    void findSum(TreeNode root, int current) {
+        if(root==null){return;}
+        current = current*10+root.val;
+        if(root.left==null && root.right==null){this.ans+=current; return;}
+        findSum(root.left, current);
+        findSum(root.right, current);
+    }
+}

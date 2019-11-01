@@ -1,0 +1,44 @@
+/*
+Algorithm: Ask the recursive function call to give the circular list and then return the merged list then create a utility function to merge 2 lists.
+*/
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    
+    TreeNode mergeList(TreeNode l, TreeNode r) {
+        if(l==null && r==null){return null;}
+        if(l==null){return r;}
+        if(r==null){return l;}
+        TreeNode lend = l.left;
+        TreeNode rend = r.left;
+        TreeNode lstart = l;
+        TreeNode rstart = r;
+        lstart.left = rstart.left=null;
+        rend.right=null;
+        lend.right = rstart;
+        lstart.left = rend;
+        return lstart;
+    }
+    
+    TreeNode giveMeCircular(TreeNode root) {
+        if(root==null)
+            return null;
+        TreeNode l = giveMeCircular(root.left);
+        TreeNode r = giveMeCircular(root.right);
+        root.left=root;root.right=null;
+        return mergeList(root, mergeList(l, r));
+        }
+    public void flatten(TreeNode root) {
+        root = giveMeCircular(root);
+        if(root!=null){root.left=null;}
+        // return root;
+    }
+}

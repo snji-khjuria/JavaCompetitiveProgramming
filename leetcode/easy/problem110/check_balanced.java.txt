@@ -1,0 +1,35 @@
+/*
+Algorithm:
+depth can never be less than 0 so <0 will act as error code and whenever error comes propagate it upwards
+if not then keep moving and checking recursively
+*/
+
+
+/**
+ * Definition for a binary tree node.
+ * public class TreeNode {
+ *     int val;
+ *     TreeNode left;
+ *     TreeNode right;
+ *     TreeNode(int x) { val = x; }
+ * }
+ */
+class Solution {
+    public boolean isBalanced(TreeNode root) {
+        if(root==null)
+            return true;
+        return depth(root)>=0;
+        
+    }
+    private int depth(TreeNode root) {
+        if(root==null)
+            return 0;
+        int l = depth(root.left);
+        int r = depth(root.right);
+        if(l==-1 || r==-1)
+            return -1;
+        if(Math.abs(l-r)<=1)
+        return 1 + Math.max(l, r);
+        return -1;
+    }
+}
